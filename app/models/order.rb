@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: orders
+#
+#  id              :bigint           not null, primary key
+#  address         :text
+#  delivery_method :string
+#  delivery_status :string
+#  email           :string
+#  order_items     :json
+#  order_status    :string
+#  payment_method  :string
+#  payment_status  :string
+#  phone_number    :string
+#  total_price     :decimal(, )
+#  user_name       :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class Order < ActiveRecord::Base
   validates :user_name, :phone_number, :email, :address,
             :payment_status, :delivery_status,
