@@ -23,10 +23,15 @@ module Myorder
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("app/middleware")
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # trace_id
+    require Rails.root.join("app/middleware/trace_id_middleware")
+    config.middleware.insert_before Rails::Rack::Logger, TraceIdMiddleware
   end
 end

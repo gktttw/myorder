@@ -7,30 +7,30 @@ module Api
     # GET /api/orders
     def index
       orders = Order.all
-      render json: orders, status: :ok
+      render_json_response(orders, status: :ok)
     end
 
     # GET /api/orders/:id
     def show
-      render json: @order, status: :ok
+      render_json_response(@order, status: :ok)
     end
 
     # POST /api/orders
     def create
       order = Order.new(order_params)
       if order.save
-        render json: order, status: :created
+        render_json_response(order, status: :created)
       else
-        render json: { errors: order.errors.full_messages }, status: :unprocessable_entity
+        render_json_response({ errors: order.errors.full_messages }, status: :unprocessable_entity)
       end
     end
 
     # PUT /api/orders/:id
     def update
       if @order.update(order_params)
-        render json: @order, status: :ok
+        render_json_response(@order, status: :ok)
       else
-        render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+        render_json_response({ errors: @order.errors.full_messages }, status: :unprocessable_entity)
       end
     end
 
@@ -45,7 +45,7 @@ module Api
     def set_order
       @order = Order.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      render json: { error: "Order not found" }, status: :not_found
+      render_json_response({ error: "Order not found" }, status: :not_found)
     end
 
     def order_params

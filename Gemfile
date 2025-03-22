@@ -48,6 +48,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "annotaterb"
+  gem "pry"
+  gem "pry-byebug"
 end
 
 gem "activerecord", "~> 8.0"
