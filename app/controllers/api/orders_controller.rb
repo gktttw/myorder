@@ -2,6 +2,8 @@
 
 module Api
   class OrdersController < ApplicationController
+    rate_limit to: 10, within: 3.minutes, only: [ :index, :show ], by: -> { request.ip }
+
     before_action :set_order, only: %i[show update destroy]
 
     # GET /api/orders
@@ -52,7 +54,7 @@ module Api
       params.require(:order).permit(:user_name, :phone_number, :email, :address,
                                     :payment_status, :delivery_status,
                                     :payment_method, :delivery_method,
-                                    :order_status, :total_price, order_items: [])
+                                    :order_status, :total_price, order_items: [ :item, :quantity, :price ])
     end
   end
 end
